@@ -18,9 +18,9 @@ def test_discount_per_province():
     assert "Chiang Rai" in data
 
     bangkok = data["Bangkok"]
-    assert any(f["food"] == "ข้าวมันไก่" and f["discounted_price"] == 50.0 for f in bangkok)
-    assert any(f["food"] == "ก๋วยเตี๋ยว" and f["discounted_price"] == 40.0 for f in bangkok)
+    assert any(f["food"] == "Pad Thai" and f["discounted_price"] == 50.0 for f in bangkok)
+    assert any(f["food"] == "Pad See Ew" and f["discounted_price"] == 40.0 for f in bangkok)
 
     chiangrai = data["Chiang Rai"]
-    assert any(f["food"] == "ข้าวมันไก่" and f["discounted_price"] == 40.0 for f in chiangrai)
-    assert any(f["food"] == "ก๋วยเตี๋ยว" and f["discounted_price"] == 32.0 for f in chiangrai)
+    assert any(f["food"] == "Pad Thai" and f["discounted_price"] == 40.0 for f in chiangrai)
+    assert any(f["food"] == "Pad See Ew" and f["discounted_price"] == 32.0 for f in chiangrai)
