@@ -3,7 +3,7 @@ from tralvel_app.main import app
 
 client = TestClient(app)
 
-def test_province_crud():
+def test_province():
     res = client.post("/province/", json={"name": "Bangkok", "is_secondary": False})
     assert res.status_code == 200
     province = res.json()

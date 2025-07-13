@@ -3,7 +3,7 @@ from tralvel_app.main import app
 
 client = TestClient(app)
 
-def test_user_crud_only_get_put_delete():
+def test_user():
 
     res = client.get("/users/")
     assert res.status_code == 200

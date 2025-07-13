@@ -3,7 +3,7 @@ from tralvel_app.main import app
 
 client = TestClient(app)
 
-def test_create_list_update_delete_food():
+def test_food():
     res = client.post("/food/", json={"name": "Pad Thai", "price": 80.0})
     assert res.status_code == 200
     food = res.json()
