@@ -16,6 +16,9 @@ def update_user(user_id: int, user_update: UserCreate, session: Session = Depend
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
+    user.firstname = user_update.firstname
+    user.lastname = user_update.lastname
+    user.age = user_update.age
     user.username = user_update.username
     user.password = user_update.password
 

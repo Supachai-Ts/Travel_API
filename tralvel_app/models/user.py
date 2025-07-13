@@ -3,5 +3,8 @@ from typing import Optional
 
 class User(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+    firstname: str
+    lastname: str
+    age: int
     username: str
     password: str
