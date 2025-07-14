@@ -4,6 +4,7 @@ from tralvel_app.schemas.user import UserCreate
 from tralvel_app.models.user import User
 from tralvel_app.core.database import get_session
 
+
 router = APIRouter()
 
 @router.post("/", response_model=User)

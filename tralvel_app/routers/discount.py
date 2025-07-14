@@ -3,11 +3,13 @@ from sqlmodel import Session, select
 from tralvel_app.models.province import Province
 from tralvel_app.models.food import Food
 from tralvel_app.core.database import get_session
+from tralvel_app.core.security import get_current_user
+from tralvel_app.models.user import User
 
 router = APIRouter()
 
 @router.get("/")
-def get_discount(session: Session = Depends(get_session)):
+def get_discount(session: Session = Depends(get_session),current_user: User = Depends(get_current_user)):
     provinces = session.exec(select(Province)).all()
     foods = session.exec(select(Food)).all()
 

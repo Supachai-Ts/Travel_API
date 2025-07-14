@@ -3,11 +3,13 @@ from sqlmodel import Session, select
 from tralvel_app.schemas.province import ProvinceCreate
 from tralvel_app.models.province import Province
 from tralvel_app.core.database import get_session
+from tralvel_app.core.security import get_current_user
+from tralvel_app.models.user import User
 
 router = APIRouter()
 
 @router.post("/", response_model=Province)
-def create_province(data: ProvinceCreate, session: Session = Depends(get_session)):
+def create_province(data: ProvinceCreate, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
     prov = Province.from_orm(data)
     session.add(prov)
     session.commit()
@@ -15,11 +17,11 @@ def create_province(data: ProvinceCreate, session: Session = Depends(get_session
     return prov
 
 @router.get("/", response_model=list[Province])
-def list_provinces(session: Session = Depends(get_session)):
+def list_provinces(session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
     return session.exec(select(Province)).all()
 
 @router.put("/{province_id}", response_model=Province)
-def update_province(province_id: int, data: ProvinceCreate, session: Session = Depends(get_session)):
+def update_province(province_id: int, data: ProvinceCreate, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
     prov = session.get(Province, province_id)
     if not prov:
         raise HTTPException(status_code=404, detail="Province not found")
@@ -31,7 +33,7 @@ def update_province(province_id: int, data: ProvinceCreate, session: Session = D
     return prov
 
 @router.delete("/{province_id}")
-def delete_province(province_id: int, session: Session = Depends(get_session)):
+def delete_province(province_id: int, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
     prov = session.get(Province, province_id)
     if not prov:
         raise HTTPException(status_code=404, detail="Province not found")
