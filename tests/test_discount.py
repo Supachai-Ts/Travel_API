@@ -9,11 +9,11 @@ def test_discount_per_province():
     token = login_res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
-    client.post("/province/", json={"name": "Bangkok", "is_secondary": False},headers=headers)
-    client.post("/province/", json={"name": "Chiang Rai", "is_secondary": True},headers=headers)
+    client.post("/province/", json={"name": "Bangkok", "is_secondary": False}, headers=headers)
+    client.post("/province/", json={"name": "Chiang Rai", "is_secondary": True}, headers=headers)
 
-    client.post("/food/", json={"name": "Pad Thai", "price": 100.0})
-    client.post("/food/", json={"name": "Pad See Ew", "price": 80.0})
+    client.post("/food/", json={"name": "Pad Thai", "price": 100.0}, headers=headers)
+    client.post("/food/", json={"name": "Pad See Ew", "price": 80.0}, headers=headers)
 
     res = client.get("/discount/", headers=headers)
     assert res.status_code == 200
